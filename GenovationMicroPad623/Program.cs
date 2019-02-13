@@ -19,6 +19,8 @@ namespace GenovationMicroPad623
 
         static void Main(string[] args)
         {
+            IDictionary<int, String> mappings = CreateMappings();
+
             SerialPort port = new SerialPort();
             port.PortName = "COM6";
             port.BaudRate = 1200;
@@ -32,44 +34,37 @@ namespace GenovationMicroPad623
 
             while (true)
             {
-                doKeystroke(port.ReadChar());
+                SendKeys.SendWait(mappings[port.ReadChar()]);
             }
 
         }
 
-        private static void doKeystroke(int input)
+        /*
+         * CreateMappings() - Creates mappings from bytes to a key representation.
+         * @return - IDictonary where the key is the byte input and the value is the keyboard key.
+         */
+        private static IDictionary<int, String> CreateMappings()
         {
-            if (input == 95)
-                SendKeys.SendWait("0");
-            else if(input == 80)
-                SendKeys.SendWait("1");
-            else if (input == 81)
-                SendKeys.SendWait("2");
-            else if (input == 82)
-                SendKeys.SendWait("3");
-            else if (input == 83)
-                SendKeys.SendWait("4");
-            else if (input == 84)
-                SendKeys.SendWait("5");
-            else if (input == 85)
-                SendKeys.SendWait("6");
-            else if (input == 86)
-                SendKeys.SendWait("7");
-            else if (input == 87)
-                SendKeys.SendWait("8");
-            else if (input == 88)
-                SendKeys.SendWait("9");
-            else if (input == 90)
-                SendKeys.SendWait("/");
-            else if (input == 91)
-                SendKeys.SendWait("*");
-            else if (input == 92)
-                SendKeys.SendWait("-");
-            else if (input == 93)
-                SendKeys.SendWait("+");
-            else if (input == 116)
-                SendKeys.SendWait("{Enter}");
+            IDictionary<int, String> mappings = new Dictionary<int, String>();
 
+            mappings.Add(95, "0");
+            mappings.Add(80, "1");
+            mappings.Add(81, "2");
+            mappings.Add(82, "3");
+            mappings.Add(83, "4");
+            mappings.Add(84, "5");
+            mappings.Add(85, "6");
+            mappings.Add(86, "7");
+            mappings.Add(87, "8");
+            mappings.Add(88, "9");
+            mappings.Add(90, "/");
+            mappings.Add(91, "*");
+            mappings.Add(92, "-");
+            mappings.Add(93, "{+}");
+            mappings.Add(94, ".");
+            mappings.Add(116, "{Enter}");
+
+            return mappings;
         }
     }
 }
