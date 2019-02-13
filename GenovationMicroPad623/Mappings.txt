@@ -14,5 +14,15 @@
 93={+}
 94=.
 116={Enter}
-65=Numlock Off
-121=Numlock On
+65={NUMLOCK}
+121={NUMLOCK}
+96={END}
+97={DOWN}
+98={PGDN}
+99={LEFT}
+101={RIGHT}
+102={HOME}
+103={UP}
+104={PGUP}
+111={INSERT}
+110={DELETE}
