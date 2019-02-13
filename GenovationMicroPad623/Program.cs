@@ -47,22 +47,16 @@ namespace GenovationMicroPad623
         {
             IDictionary<int, String> mappings = new Dictionary<int, String>();
 
-            mappings.Add(95, "0");
-            mappings.Add(80, "1");
-            mappings.Add(81, "2");
-            mappings.Add(82, "3");
-            mappings.Add(83, "4");
-            mappings.Add(84, "5");
-            mappings.Add(85, "6");
-            mappings.Add(86, "7");
-            mappings.Add(87, "8");
-            mappings.Add(88, "9");
-            mappings.Add(90, "/");
-            mappings.Add(91, "*");
-            mappings.Add(92, "-");
-            mappings.Add(93, "{+}");
-            mappings.Add(94, ".");
-            mappings.Add(116, "{Enter}");
+            //Parse through mappings text file and assign dictionary values
+            string[] keys = System.IO.File.ReadAllLines("Mappings.txt");
+
+            foreach (String key in keys)
+            {
+                int byteValue = Int32.Parse(key.Split('=')[0]);
+                String keyValue = key.Split('=')[1];
+
+                mappings.Add(byteValue, keyValue);
+            }
 
             return mappings;
         }
